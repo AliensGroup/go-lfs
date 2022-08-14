@@ -133,8 +133,11 @@ func main() {
 	view.RegisterExporter(pe)
 
 	exporter, err := jaeger.NewExporter(jaeger.Options{
-		Endpoint:    Config.TraceURL,
-		ServiceName: "git-lfs",
+		Endpoint: Config.TraceURL,
+		Process: jaeger.Process{
+			ServiceName: "git-lfs",
+			Tags:        []jaeger.Tag{},
+		},
 	})
 	defer exporter.Flush()
 	if err != nil {
