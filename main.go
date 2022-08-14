@@ -12,7 +12,6 @@ import (
 	"time"
 
 	log "github.com/sirupsen/logrus"
-	"go.opencensus.io/exporter/jaeger"
 	"go.opencensus.io/exporter/prometheus"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
@@ -132,18 +131,18 @@ func main() {
 	}
 	view.RegisterExporter(pe)
 
-	exporter, err := jaeger.NewExporter(jaeger.Options{
-		Endpoint: Config.TraceURL,
-		Process: jaeger.Process{
-			ServiceName: "git-lfs",
-			Tags:        []jaeger.Tag{},
-		},
-	})
-	defer exporter.Flush()
-	if err != nil {
-		log.Fatalln(err)
-	}
-	trace.RegisterExporter(exporter)
+	//exporter, err := jaeger.NewExporter(jaeger.Options{
+	//	Endpoint: Config.TraceURL,
+	//	Process: jaeger.Process{
+	//		ServiceName: "git-lfs",
+	//		Tags:        []jaeger.Tag{},
+	//	},
+	//})
+	//defer exporter.Flush()
+	//if err != nil {
+	//	log.Fatalln(err)
+	//}
+	//trace.RegisterExporter(exporter)
 
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 
