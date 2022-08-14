@@ -35,7 +35,7 @@ func (c *Configuration) IsHTTPS() bool {
 
 func (c *Configuration) IsPublic() bool {
 	switch Config.Public {
-	case "1", "true", "TRUE":
+	case "1", "true", "TRUE", "public":
 		return true
 	}
 	return false
